@@ -48,3 +48,15 @@ public class GameController {
         return gameService.getMinimalGroup();
     }
 }
+@RestController
+@RequestMapping(path = "/api/v1")
+@RequiredArgsConstructor
+@Log4j2
+public class AddressController {
+    private final AddressService addressService;
+    @GetMapping(path = "addresses")
+    @Operation(tags = "Corrector", description = "Obtains the list of corrected addresses")
+    public List<CorrectedAddress> getCorrectedAddress(@RequestParam String country, @RequestParam String state, @RequestParam String city) {
+        return addressService.getCorrectedAddress(new Address(country, state, city));
+    }
+}
